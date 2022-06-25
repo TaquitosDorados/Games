@@ -8,6 +8,7 @@ import DirectoryScreen from './DirectoryScreen';
 import TabScreen from './TabScreen';
 import DrawerScreen from './DrawerScreen';
 import GuessScreen from './GuessScreen';
+import PiedraScreen from './Piedra';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +23,7 @@ export default function App() {
         />
         <Stack.Screen name="Directory" component={DirectoryScreen} options={{title: "Directorio de Juegos"}} />
         <Stack.Screen name="Guess" component={GuessScreen} options={{title: "Guess my Number"}} />
+        <Stack.Screen name="Piedra" component={PiedraScreen} options={{title: "Piedra Papel o Tijeras"}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
