@@ -3,7 +3,6 @@ import {StyleSheet, View, Button, Text, TextInput} from 'react-native';
 import List from './List';
 
 const mapItems = (items) => items.map((value, i) => ({ key: i.toString(), value }));
-const mapAttempts = (items) => items.map((value, i) => ({ key: i.toString(), value }));
 
 function generateRandomNumber(max, min = 1) {
     return Math.floor(Math.random()*(max-min) + min);

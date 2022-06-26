@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, Button, Image, Text, TextInput} from 'react-native';
-import imgPiedra from './assets/piedra.png';
+
 function generateRandomNumber(max, min = 1) {
     return Math.floor(Math.random()*(max-min) + min);
 }
