@@ -86,8 +86,8 @@ function GuessScreen({navigation}) {
         <View style={styles.game}>
             <Text style={styles.title}>Guess my number</Text>
             <TextInput
+                autoFocus={false}
                 style={styles.input}
-                autoFocus
                 onChangeText = {handleOnChange}
                 defaultValue = {number}
             />
@@ -107,9 +107,9 @@ function GuessScreen({navigation}) {
             }
 
         <List data = {mapItems(guessList)}/>
-
+            <View style={styles.caja}>
             <Text style={styles.title}>Guess your number</Text>
-            <Text>{myAttempt}</Text>
+            <Text style={styles.number}>{myAttempt}</Text>
             <Button title='Muy Bajo' onPress={handleOnLow}/>
             <Button title='Muy Alto' onPress={handleOnHigh}/>
             <Button title='Correcto!' onPress={handleOnWin}/>
@@ -118,6 +118,7 @@ function GuessScreen({navigation}) {
                     <Text>Lo he adivinado en {countAttempt} intentos!</Text>
                     : null
             }
+            </View>
             
         </View>
     );
@@ -128,21 +129,35 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        width: 400,
+        width: '100%',
+        height: '100%',
+        backgroundColor: '#F99FEA'
     },
 
     input: {
         width: 200,
+        height: 50,
         textAlign: 'center',
         marginBottom: 10,
-        backgroundColor: 'ghostwhite'
+        backgroundColor: '#E28AD3'
     },
 
     title: {
         fontWeight: 'bold',
-        fontSize: 20,
+        fontSize: 30,
         marginTop: 50,
         textAlign: 'center',
+    },
+
+    number: {
+        fontSize: 20,
+        margin: 10, 
+        fontWeight: 'bold',
+    },
+
+    caja: {
+        marginBottom: 60,
+        alignItems: 'center',
     }
 });
 

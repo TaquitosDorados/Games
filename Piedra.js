@@ -117,7 +117,7 @@ function Piedra(props) {
             }
             </View>
 
-            <View style={styles.ImagesContainer}>
+            <View style={styles.ButtonContainer}>
                 {
                     gameEnded?
                     <View>
@@ -125,7 +125,7 @@ function Piedra(props) {
                     <Button onPress={restartGame} title="Jugar de Nuevo"/>
                     </View>
                     :
-                    <View style={styles.ImagesContainer}>
+                    <View style={styles.ButtonContainer}>
                     <Button onPress={becomePiedra} title="Piedra" id="1"/>
                     <Button onPress={becomePapel} title="Papel" id="2"/>
                     <Button onPress={becomeTijera} title="Tijera" id="3"/>
@@ -142,10 +142,7 @@ const styles = StyleSheet.create({
         height: '100%',
         justifyContent: 'center',
         alignItems: "center",
-        backgroundColor: 'lightgray',
-        borderWidth: 1,
-        borderRadius: 8,
-        margin: 10,
+        backgroundColor: '#9D93F3',
         alignSelf:"center",
     },
 
@@ -153,6 +150,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         marginTop: 10,
+    },
+
+    ButtonContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: '#877FCD',
+        marginTop: 10,
+        borderRadius: 8,
     }
 })
 

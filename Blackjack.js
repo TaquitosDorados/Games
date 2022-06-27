@@ -337,22 +337,24 @@ function Blackjack(props) {
     }
 
     return (
-        <View>
-            <Text>Trata de Sacar 21!</Text>
-            <Text>Cartas Del Rival</Text>
-            <List data = {mapItems(cpuCardList)} ></List>
-            <Text>Tus Cartas</Text>
+        <View style={styles.root}>
+            <Text style={styles.title}>Trata de Sacar 21!</Text>
+            <Image style={{width: 200, height: 200}} source={require('./assets/luigi.png')}/>
+            <Text style={styles.subtitle}>Cartas Del Rival</Text>
+            <List style={styles.cards} data = {mapItems(cpuCardList)} ></List>
+            <Text style={styles.subtitle}>Tus Cartas</Text>
             <List data = {mapItems(cardList)} ></List>
             
             {
                 gameEnded?
-                <View>
-                    <Text>{message}</Text>
+                <View style = {styles.button}>
+                    <Text style = {{alignSelf: 'center', color: 'lightgrey', fontSize:20, margin: 10}}>{message}</Text>
                     <Button onPress={restartGame} title="Jugar de Nuevo"/>
                 </View>
                 :
-                <View>
+                <View style = {styles.button}>
                 <Button title = "Hit Me" onPress = {handleOnHit}/>
+                <Text style = {{alignSelf: 'center', color: 'lightgrey'}}>─</Text>
                 <Button title = "Hold" onPress = {handleOnHold}/>
                 </View>
             }
@@ -361,3 +363,38 @@ function Blackjack(props) {
 }
 
 export default Blackjack;
+
+const styles = StyleSheet.create({
+    root: {
+        width: '100%',
+        height: '100%',
+        justifyContent: 'flex-start',
+        flex:1,
+        flexDirection: 'column',
+        alignItems: "center",
+        backgroundColor: "#78C059",
+    },
+
+    title: {
+        fontSize: 40,
+        fontWeight: "bold",
+        color: "green",
+    },
+
+    button: {
+        backgroundColor: "#64A14A",
+        borderRadius: 8,
+        margin: 20
+    },
+
+    subtitle: {
+        fontSize: 30,
+        fontWeight: "bold",
+        marginTop: 20,
+        color: "#7C1B1B",
+    },
+
+    cards: {
+        fontSize: 20,
+    }
+})
