@@ -238,6 +238,14 @@ function calculatePunctuation(cards){
         }
     })
 
+    for (let i=0;i<numAs;i++){
+        if(score + 11<=21){
+            score += 11;
+        } else {
+            score ++;
+        }
+    }
+
     return score;
 }
 
@@ -249,14 +257,105 @@ function Blackjack(props) {
     const [cpuCardList, setCpuCardList] = useState([interpretarCarta(generateRandomNumber(53,1)),]);
     const [currentScore, setCurrentScore] = useState(calculatePunctuation(cardList));
     const [cpuScore, setCpuScore] = useState(calculatePunctuation(cpuCardList));
+    const [gameEnded, setGameEnded] = useState(false);
+    const [message, setMessage] = useState('');
+
+    handleOnHit = () => {
+        const newCardList = [
+            ...cardList,
+            interpretarCarta(generateRandomNumber(53,1))
+        ];
+
+        setCardList([
+            ...newCardList,
+        ])
+        const newScore = calculatePunctuation(newCardList);
+        setCurrentScore(newScore);
+
+        setMessage(checkScores(newScore, cpuScore));
+    }
+
+    handleOnHold = () => {
+        let newCpuScore = cpuScore;
+        let newCpuCardList = [
+            ...cpuCardList
+        ];
+
+        while(newCpuScore<17){
+            newCpuCardList = [
+                ...newCpuCardList,
+                interpretarCarta(generateRandomNumber(53,1))
+            ];
+            newCpuScore = calculatePunctuation(newCpuCardList);
+        }
+
+        setCpuCardList([...newCpuCardList]);
+        setCpuScore(newCpuScore);
+
+        setMessage(checkScores(currentScore,newCpuScore));
+        setGameEnded(true);
+    }
+
+    function checkScores(score, cpuScore){
+        if(score === 21){
+            setGameEnded(true);
+            return 'BLACKJACK!';
+        } else if(score>21){
+            setGameEnded(true);
+            return `${score}. Te haz pasado!`;
+        } else if(cpuScore>21){
+            setGameEnded(true);
+            return `${cpuScore} - ${score}. Haz ganado!`;
+        } else if(score>cpuScore){
+            return `${cpuScore} - ${score}. Haz ganado!`;
+        } else if(score<cpuScore){
+            return `${cpuScore} - ${score}. Haz perdido!`;
+        } else {
+            return `${cpuScore} - ${score}. Empate!`;
+        }
+    }
+
+    function restartGame(){
+        const newCardList = 
+        [
+            interpretarCarta(generateRandomNumber(53,1)),
+            interpretarCarta(generateRandomNumber(53,1))
+        ];
+
+        const newCpuCardList = [
+            interpretarCarta(generateRandomNumber(53,1)),
+        ];
+
+        const newScore = calculatePunctuation(newCardList);
+        const newCpuScore = calculatePunctuation(newCpuCardList);
+
+        setCardList([...newCardList]);
+        setCpuCardList([...newCpuCardList]);
+        setCurrentScore(newScore);
+        setCpuScore(newCpuScore);
+        setGameEnded(false);
+    }
 
     return (
         <View>
             <Text>Trata de Sacar 21!</Text>
-
+            <Text>Cartas Del Rival</Text>
+            <List data = {mapItems(cpuCardList)} ></List>
             <Text>Tus Cartas</Text>
             <List data = {mapItems(cardList)} ></List>
-            <Text>{calculatePunctuation(cardList)}</Text>
+            
+            {
+                gameEnded?
+                <View>
+                    <Text>{message}</Text>
+                    <Button onPress={restartGame} title="Jugar de Nuevo"/>
+                </View>
+                :
+                <View>
+                <Button title = "Hit Me" onPress = {handleOnHit}/>
+                <Button title = "Hold" onPress = {handleOnHold}/>
+                </View>
+            }
         </View>
     );
 }
