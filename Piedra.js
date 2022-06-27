@@ -83,7 +83,8 @@ function Piedra(props) {
 
     return (
         <View style={styles.root}>
-            <Text>{myPunctuation} ------------- {cpuPunctuation}</Text>
+            <Text style={styles.punctuation}>Yo               CPU</Text>
+            <Text style={styles.punctuation}>{myPunctuation}                    {cpuPunctuation}</Text>
             <View style={styles.ImagesContainer}>
             {
                 mySelection === 1 ?
@@ -158,6 +159,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#877FCD',
         marginTop: 10,
         borderRadius: 8,
+    },
+
+    punctuation:{
+        fontSize: 20,
+        fontWeight: 'bold',
     }
 })
 
